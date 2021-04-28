@@ -14,8 +14,9 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def homepage():
-    """Return landing page."""
-    return render_template("index.html")
+    """Return landing page with list of tutorials."""
+    tutorials = Tutorial.query.all()
+    return render_template("index.html", tutorials=tutorials)
 
 
 @main.route("/new_resource", methods=["GET", "POST"])
@@ -53,7 +54,7 @@ def new_tutorial():
         db.session.add(tutorial)
         db.session.commit()
         flash("Thank you for adding this tutorial!")
-        redirect(url_for("main.tutorials", tutorial_id=tutorial.id))
+        redirect(url_for("main.tutorial_details", tutorial_id=tutorial.id))
     return render_template("new_tutorial.html", form=form)
 
 
@@ -64,16 +65,6 @@ def resources():
     # All resources have a short description and an external link
     resources = Resource.query.all()
     return render_template("resources.html", resources=resources)
-
-
-@main.route("/tutorials")
-def all_tutorials():
-    """See or search through all available tutorials."""
-    # TODO: Maybe integrate this with homepage?
-    # TODO: each tutorial will have a detail page where you can
-    # see and work through all the content
-    tutorials = Tutorial.query.all()
-    return render_template("tutorials_list.html", tutorials=tutorials)
 
 
 @main.route("/tutorials/<tutorial_id>")
