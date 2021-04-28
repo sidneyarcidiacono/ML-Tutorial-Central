@@ -22,24 +22,24 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Tutorials</a>
+            <a class="nav-link" href="{{ url_for('main.all_tutorials') }}">Tutorials</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Resources</a>
+            <a class="nav-link" href="{{ url_for('main.resources') }}">Resources</a>
           </li>
           {% if current_user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Contribute</a>
+              <a class="nav-link" href="{{ url_for('main.contribute') }}">Contribute</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Sign Out</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Sign In</a>
+              <a class="nav-link" href="{{ url_for('auth.signin') }}">Sign In</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sign Up</a>
+              <a class="nav-link" href="{{ url_for('auth.signup') }}">Sign Up</a>
             </li>
           {% endif %}
         </ul>

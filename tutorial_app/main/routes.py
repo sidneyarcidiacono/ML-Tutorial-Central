@@ -15,7 +15,26 @@ def homepage():
     return render_template("index.html")
 
 
-@main.route("/")
+@main.route("/contribute", methods=["GET", "POST"])
 def contribute():
     """Add new tutorial or resource to the site."""
+    # TODO: create a template for this with a form that works for either
+    # adding resources or adding tutorials
     return render_template("contribute.html")
+
+
+@main.route("/resources")
+def resources():
+    """See list of resources and descriptions."""
+    # Resources won't have a details page
+    # All resources have a short description and an external link
+    return render_template("resources.html")
+
+
+@main.route("/tutorials")
+def all_tutorials():
+    """See or search through all available tutorials."""
+    # TODO: Maybe integrate this with homepage?
+    # TODO: each tutorial will have a detail page where you can
+    # see and work through all the content
+    return render_template("tutorials_list.html")

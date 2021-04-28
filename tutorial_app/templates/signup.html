@@ -1,0 +1,38 @@
+<!-- signup.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 m-auto text-center">
+  <h1>Sign Up</h1>
+
+  <form action="{{ url_for('auth.signup') }}" method="POST" class="m-auto text-center col-md-6">
+    {{ form.csrf_token }}
+    <fieldset>
+      <legend>Enter your credentials</legend>
+      <div class="form-group col">
+        <div class="col-sm-10">
+          {{ form.username.label }}
+          {{ form.username }}
+        </div>
+      </div>
+      <ul>
+        {% for error in form.username.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      <div class="form-group col">
+        <div class="col-sm-10">
+          {{ form.password.label }}
+          {{ form.password }}
+        </div>
+      </div>
+      <ul>
+        {% for error in form.password.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {{ form.submit }}
+    </fieldset>
+  </form>
+</div>
+{% endblock %}
