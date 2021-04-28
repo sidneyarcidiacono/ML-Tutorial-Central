@@ -1,6 +1,8 @@
 """Main routes."""
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
+from tutorial_app.main.forms import TutorialForm, ResourceForm
+from tutorial_app.models import Tutorial, Resource, User
 
 # from grocery_app.models import GroceryStore, GroceryItem
 # from grocery_app.main.forms import GroceryStoreForm, GroceryItemForm
@@ -15,12 +17,20 @@ def homepage():
     return render_template("index.html")
 
 
-@main.route("/contribute", methods=["GET", "POST"])
-def contribute():
+@main.route("/new_resource", methods=["GET", "POST"])
+@login_required
+def new_resource():
     """Add new tutorial or resource to the site."""
-    # TODO: create a template for this with a form that works for either
-    # adding resources or adding tutorials
-    return render_template("contribute.html")
+    form = ResourceForm()
+    return render_template("new_resource.html", form=form)
+
+
+@main.route("/new_tutorial", methods=["GET", "POST"])
+@login_required
+def new_tutorial():
+    """Add new tutorial or resource to the site."""
+    form = TutorialForm()
+    return render_template("new_tutorial.html", form=form)
 
 
 @main.route("/resources")
