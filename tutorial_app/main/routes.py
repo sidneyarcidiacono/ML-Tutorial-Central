@@ -11,5 +11,11 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def homepage():
-    """For now, return "Hello world"""
-    return "Hello, world"
+    """Return landing page."""
+    return render_template("index.html")
+
+
+@main.route("/")
+def contribute():
+    """Add new tutorial or resource to the site."""
+    return render_template("contribute.html")
