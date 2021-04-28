@@ -12,7 +12,7 @@ app.secret_key = os.urandom(24)
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-login_manager.login_view = "auth.login"
+login_manager.login_view = "auth.signin"
 bcrypt = Bcrypt(app)
 
 from tutorial_app.models import User
