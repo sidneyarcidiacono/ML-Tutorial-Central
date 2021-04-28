@@ -45,6 +45,7 @@ class ResourceForm(FlaskForm):
         validators=[DataRequired()],
     )
     title = StringField("Title", validators=[DataRequired(), Length(max=80)])
+    description = TextAreaField("Description", validators=[Length(max=120)])
     link = StringField(
         "Link", validators=[DataRequired(), URL(), Length(max=200)]
     )

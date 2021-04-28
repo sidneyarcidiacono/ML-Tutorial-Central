@@ -3,8 +3,60 @@
 
 <div class="col-md-9 text-center m-auto">
 
-  <h1>New Tutorial</h1>
+  <h1 class="mt-3">New Tutorial</h1>
   <small>New tutorials go through a short review process to ensure they meet our quality standards.</small>
+
+  <form action="{{ url_for('main.new_tutorial') }}" method="POST" class="m-auto text-center col-md-6">
+    {{ form.csrf_token }}
+    <fieldset>
+      <legend class="mt-3">Add Your Tutorial!</legend>
+      <div class="form-group col">
+        <div class="col-sm-10">
+          {{ form.category.label }}
+          {{ form.category }}
+        </div>
+      </div>
+      <ul>
+        {% for error in form.category.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      <div class="form-group col">
+        <div class="col-sm-10">
+          {{ form.title.label }}
+          {{ form.title }}
+        </div>
+      </div>
+      <ul>
+        {% for error in form.title.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      <div class="form-group col">
+        <div class="col-sm-10">
+          {{ form.difficulty.label }}
+          {{ form.difficulty }}
+        </div>
+      </div>
+      <ul>
+        {% for error in form.difficulty.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      <div class="form-group">
+        {{ form.body.label }}
+        <textarea class="form-control" rows="3" placeholder="Your content goes here!">
+          {{ form.body }}
+        </textarea>
+      </div>
+      <ul>
+        {% for error in form.body.errors %}
+        <li class="error">{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {{ form.submit }}
+    </fieldset>
+  </form>
 
 </div>
 

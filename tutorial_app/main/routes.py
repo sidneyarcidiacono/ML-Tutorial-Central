@@ -4,6 +4,8 @@ from flask_login import login_required, current_user
 from tutorial_app.main.forms import TutorialForm, ResourceForm
 from tutorial_app.models import Tutorial, Resource, User
 
+from tutorial_app import db
+
 # TODO: enable user to keep a list of their saved tutorials
 # TODO: enable user to track their own progress?
 
