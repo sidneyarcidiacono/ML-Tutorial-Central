@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="m-auto text-center col-md-6">
-  <h1>Machine Learning Tutorials</h1>
+<div class="jumbotron mb-10 text-center">
+  <h1>Machine Learning Central</h1>
+
+  <h4 class="lead">Your community for all things Machine Learning Engineering!</h4>
+  <hr class="my-4">
+
+  <p>With content for the newest of beginners through experts in their fields looking to brush up,
+  <em>ML Central</em> has it all for you!</p>
+</div>
+
+<div class="m-auto text-center col-md-12">
+
+<h2>Browse Tutorials</h2>
+
+{% for tutorial in tutorials %}
+  <div class="card text-white bg-primary mt-5 mb-3 ml-auto mr-auto" style="max-width: 80rem;">
+    <div class="card-header">{{ tutorial.difficulty }}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{ tutorial.title }}</h4>
+      <p class="card-text">{{ tutorial.category }}</p>
+      <a href="{{ url_for('main.tutorial_details', tutorial_id=tutorial.id) }}">Get Started!</a>
+    </div>
+  </div>
+{% endfor %}
+
 </div>
 
 {% endblock %}
