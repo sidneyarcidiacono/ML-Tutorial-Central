@@ -71,4 +71,5 @@ def resources():
 def tutorial_details(tutorial_id):
     """View tutorial content."""
     # In the future it would be nice if users could track their progress!
-    return render_template("tutorial_detail.html")
+    tutorial = Tutorial.query.get(tutorial_id)
+    return render_template("tutorial_detail.html", tutorial=tutorial)
