@@ -73,3 +73,23 @@ def tutorial_details(tutorial_id):
     # In the future it would be nice if users could track their progress!
     tutorial = Tutorial.query.get(tutorial_id)
     return render_template("tutorial_detail.html", tutorial=tutorial)
+
+
+@main.route("/tutorials/edit/<tutorial_id>", methods=["GET", "POST"])
+def edit_tutorial(tutorial_id):
+    """Edit tutorial details."""
+    # Even though this isn't a perfect "real world" approach, for now anyone can
+    # edit a tutorial
+    tutorial = Tutorial.query.get(tutorial_id)
+    form = TutorialForm(obj=tutorial)
+    if form.validate_on_submit():
+        tutorial.title = form.title.data
+        tutorial.category = form.category.data
+        tutorial.difficulty = form.difficulty.data
+        tutorial.body = form.body.data
+        db.session.commit()
+        flash("Tutorial has been successfully updated.")
+        return redirect(
+            url_for("main.tutorial_details", tutorial_id=tutorial.id)
+        )
+    return render_template("edit_tutorial.html", form=form, tutorial=tutorial)

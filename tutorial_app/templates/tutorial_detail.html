@@ -14,4 +14,14 @@
   <p>{{ tutorial.body }}</p>
 </div>
 
+{% if current_user.is_authenticated %}
+
+  <div class="m-auto text-center col-md-4">
+    <small>Have edits in mind?</small>
+
+    <a href="/tutorials/edit/{{ tutorial.id }}">Edit Tutorial</a>
+  </div>
+
+{% endif %}
+
 {% endblock %}
