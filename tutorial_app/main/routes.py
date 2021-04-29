@@ -34,7 +34,7 @@ def new_resource():
         db.session.add(resource)
         db.session.commit()
         flash("Thank you for sharing your new resource!")
-        redirect(url_for("main.resources"))
+        return redirect(url_for("main.resources"))
     return render_template("new_resource.html", form=form)
 
 
@@ -54,7 +54,9 @@ def new_tutorial():
         db.session.add(tutorial)
         db.session.commit()
         flash("Thank you for adding this tutorial!")
-        redirect(url_for("main.tutorial_details", tutorial_id=tutorial.id))
+        return redirect(
+            url_for("main.tutorial_details", tutorial_id=tutorial.id)
+        )
     return render_template("new_tutorial.html", form=form)
 
 
