@@ -6,7 +6,6 @@ from tutorial_app.models import Tutorial, Resource, User
 
 from tutorial_app import db
 
-# TODO: enable user to keep a list of their saved tutorials
 # TODO: enable user to track their own progress?
 
 main = Blueprint("main", __name__)
@@ -60,7 +59,7 @@ def new_tutorial():
 
 @main.route("/resources")
 def resources():
-    """See list of resources and descriptions."""
+    """See list of resources."""
     # Resources won't have a details page
     # All resources have a short description and an external link
     resources = Resource.query.all()
@@ -68,9 +67,11 @@ def resources():
 
 
 @main.route("/resources/delete/<resource_id>")
+@login_required
 def delete_resource(resource_id):
-    """View tutorial content."""
-    # In the future it would be nice if users could track their progress!
+    """Delete resource by id."""
+    # We also have the poor "real world" case of anyone logged in
+    # being able to delete a resource, but for our MVP that's fine
     resource = Resource.query.get(resource_id)
     db.session.delete(resource)
     db.session.commit()
@@ -87,6 +88,7 @@ def tutorial_details(tutorial_id):
 
 
 @main.route("/tutorials/edit/<tutorial_id>", methods=["GET", "POST"])
+@login_required
 def edit_tutorial(tutorial_id):
     """Edit tutorial details."""
     # Even though this isn't a perfect "real world" approach, for now anyone can
@@ -104,3 +106,16 @@ def edit_tutorial(tutorial_id):
             url_for("main.tutorial_details", tutorial_id=tutorial.id)
         )
     return render_template("edit_tutorial.html", form=form, tutorial=tutorial)
+
+
+@main.route("/tutorials/delete/<tutorial_id>")
+@login_required
+def delete_tutorial(tutorial_id):
+    """Delete tutorial."""
+    # We also have the poor "real world" case of anyone logged in
+    # being able to delete a tutorial, but for our MVP that's fine
+    tutorial = Tutorial.query.get(tutorial_id)
+    db.session.delete(tutorial)
+    db.session.commit()
+    flash("Tutorial successfully deleted!")
+    return redirect(url_for("main.homepage"))
