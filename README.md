@@ -1,6 +1,6 @@
 # Machine Learning "Tutorial Central"
 
-## ![Logo](/tutorial_app/static/assets/logo.png) Learn Machine Learning Engineering from Start to Finish - all in one place!
+## ![Logo](/tutorial_app/static/assets/logo.png) Your Machine Learning Engineering Community
 
 Check out *your* machine learning community [here](https://ml-central.herokuapp.com)
 
