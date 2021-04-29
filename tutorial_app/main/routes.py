@@ -29,6 +29,7 @@ def new_resource():
             category=form.category.data,
             title=form.title.data,
             link=form.link.data,
+            description=form.description.data,
         )
         db.session.add(resource)
         db.session.commit()
