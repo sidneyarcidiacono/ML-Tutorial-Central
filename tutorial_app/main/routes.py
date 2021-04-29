@@ -67,6 +67,17 @@ def resources():
     return render_template("resources.html", resources=resources)
 
 
+@main.route("/resources/delete/<resource_id>")
+def delete_resource(resource_id):
+    """View tutorial content."""
+    # In the future it would be nice if users could track their progress!
+    resource = Resource.query.get(resource_id)
+    db.session.delete(resource)
+    db.session.commit()
+    flash("Resource successfully deleted!")
+    return redirect(url_for("main.resources"))
+
+
 @main.route("/tutorials/<tutorial_id>")
 def tutorial_details(tutorial_id):
     """View tutorial content."""
