@@ -23,6 +23,8 @@ def signin():
     form = SignInForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        if not user:
+            flash("No user with that username. Please try again.")
         if user and bcrypt.check_password_hash(
             user.password, form.password.data
         ):
