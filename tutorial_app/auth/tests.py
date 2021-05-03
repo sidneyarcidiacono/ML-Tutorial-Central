@@ -3,8 +3,6 @@
 import os
 from unittest import TestCase
 
-from datetime import date
-
 from tutorial_app import app, db, bcrypt
 from tutorial_app.models import User, Tutorial, Resource
 
