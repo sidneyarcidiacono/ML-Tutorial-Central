@@ -23,11 +23,11 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-from tutorial_app.auth.routes import auth
-from tutorial_app.main.routes import main
+from tutorial_app.auth.routes import auth as auth_routes
+from tutorial_app.main.routes import main as main_routes
 
-app.register_blueprint(main)
-app.register_blueprint(auth)
+app.register_blueprint(main_routes)
+app.register_blueprint(auth_routes)
 
 
 with app.app_context():

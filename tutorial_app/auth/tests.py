@@ -16,28 +16,6 @@ python3 -m unittest tutorial_app.auth.tests
 #################################################
 
 
-def create_tutorial():
-    t1 = Tutorial(
-        category="Machine Learning",
-        title="Test Tutorial",
-        difficulty="Beginner",
-        body="Test body",
-    )
-    db.session.add(t1)
-    db.session.commit()
-
-
-def create_resource():
-    r1 = Resource(
-        category="Machine Learning",
-        title="Test Resource",
-        description="Test resource",
-        link="https://medium.com",
-    )
-    db.session.add(r1)
-    db.session.commit()
-
-
 def create_user():
     password_hash = bcrypt.generate_password_hash("password").decode("utf-8")
     user = User(username="testuser", password=password_hash)
@@ -118,23 +96,6 @@ class AuthTests(unittest.TestCase):
         self.assertIn("Sign In", response_text)
         self.assertIn(
             "No user with that username. Please try again.", response_text
-        )
-        self.assertNotIn("Sign Out", response_text)
-
-    def test_signin_incorrect_password(self):
-        """Ensure that a user cannot sign in with the incorrect password."""
-        create_user()
-
-        post_data = {
-            "username": "testuser",
-            "password": "passwords",
-        }
-        response = self.app.post("/signin", data=post_data)
-
-        response_text = response.get_data(as_text=True)
-        self.assertIn("Sign In", response_text)
-        self.assertIn(
-            "Password doesn&#39;t match. Please try again", response_text
         )
         self.assertNotIn("Sign Out", response_text)
 
