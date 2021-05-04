@@ -1,7 +1,7 @@
 """Tests for auth routes."""
 # Thank you to Meredith Murphy for the test setup code
 import os
-from unittest import TestCase
+import unittest
 
 from tutorial_app import app, db, bcrypt
 from tutorial_app.models import User, Tutorial, Resource
@@ -50,7 +50,7 @@ def create_user():
 #################################################
 
 
-class AuthTests(TestCase):
+class AuthTests(unittest.TestCase):
     """Tests for authentication (login & signup)."""
 
     def setUp(self):
